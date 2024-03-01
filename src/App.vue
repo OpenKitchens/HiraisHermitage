@@ -6,3 +6,9 @@ import { RouterView } from 'vue-router'
 <template>
   <RouterView />
 </template>
+
+<style>
+body {
+  overflow-x: hidden;
+}
+</style>

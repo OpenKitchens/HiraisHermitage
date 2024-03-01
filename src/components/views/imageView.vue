@@ -56,6 +56,10 @@ const favorite = () => {
   })
   thread.value.favorite++
   thread.value.bad--
+
+  if(thread.value.bad <= 0){
+    thread.value.bad = 0
+  }
 }
 
 const bad = () => {
@@ -69,6 +73,10 @@ const bad = () => {
   })
   thread.value.bad++
   thread.value.favorite--
+
+  if(thread.value.favorite <= 0){
+    thread.value.favorite = 0
+  }
 }
 
 
@@ -133,10 +141,6 @@ const bad = () => {
 <style>
 @keyframes fadeInAnime {
   0% {
-    opacity: 1;
-  }
-
-  50% {
     opacity: 1;
   }
 

@@ -31,6 +31,10 @@ const request = (accessPoint: any, data: any, func: any) => {
 request("getThreads", {}, (data: any) => {
   threads.value = data
   console.log(data)
+  loading.value = "animation: fadeInAnime 2s forwards"
+  setTimeout(() => {
+    loadingView.value = false
+  }, 1000);
 })
 
 const threads: any = ref([])
@@ -42,9 +46,18 @@ const goView = (data: any) => {
   });
 
 }
+
+const loadingView = ref(true)
+const loading = ref("")
 </script>
 
 <template>
+  <div class="w-full h-full position fixed z-20 bg-black loading" :style="loading" v-if="loadingView">
+    <h1 class="text-white text-center font-bold text-3xl"
+      style="position: absolute;top: 50vh;left: 50vw;transform: translate(-50%,-50%);">
+      After school
+    </h1>
+  </div>
   <div class="mx-auto" style="width: 1020px">
     <div class="flex justify-between position fixed mt-5" style="width: 1020px">
       <RouterLink class="text-white text-center font-bold text-3xl" to="/">After school</RouterLink>
@@ -72,7 +85,7 @@ const goView = (data: any) => {
     <div class="mx-auto pt-12" style="width: 1020px">
       <h1 class="text-white text-left font-extrabold tracking-tight text-3xl mb-5">After Gallery</h1>
 
-      <div class="grid grid-cols-3 gap-4">
+      <div class="grid grid-cols-3 gap-4 mb-20">
         <div v-for="thread in threads" class="position relative card">
           <div class="flex items-center justify-center position relative card z-10" @click="goView(thread.threadID)">
             <div class="flex flex-col">
@@ -83,6 +96,13 @@ const goView = (data: any) => {
             </div>
           </div>
           <img :src="thread.Image" class="position absolute top-0 z-0 card opacity-70">
+        </div>
+      </div>
+
+      <div class="w-screen mt-20 mb-10">
+        <div style="width: 1020px">
+          <h1 class="text-white text-left font-bold text-3xl">After school</h1>
+          <p class="text-white text-left mt-3 font-semibold opacity-50">create by MOYASI ❤️</p>
         </div>
       </div>
 
