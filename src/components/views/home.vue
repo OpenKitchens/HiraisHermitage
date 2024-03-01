@@ -46,7 +46,7 @@ const goView = (data: any) => {
 
 <template>
   <div class="mx-auto" style="width: 1020px">
-    <div class="flex justify-between position fixed mt-2" style="width: 1020px">
+    <div class="flex justify-between position fixed mt-5" style="width: 1020px">
       <RouterLink class="text-white text-center font-bold text-3xl" to="/">After school</RouterLink>
 
       <RouterLink class="px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300" to="/postThread">

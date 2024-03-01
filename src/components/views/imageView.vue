@@ -31,10 +31,16 @@ request("getThread", { threadID: route.query.view }, (data: any) => {
   thread.value = data
   console.log(data)
   background.value = `background-image: url('${data.Image}')`
+  loading.value = "animation: fadeInAnime 2s forwards"
+  setTimeout(() => {
+    loadingView.value = false
+  }, 1000);
 })
 
 const thread: any = ref({})
 const background = ref("")
+const loading = ref("")
+const loadingView = ref(true)
 
 const favoriteSrc = ref("/icons/heart.svg")
 const badSrc = ref("/icons/bad.svg")
@@ -69,8 +75,14 @@ const bad = () => {
 </script>
 
 <template>
+  <div class="w-full h-full position fixed z-20 bg-black loading" :style="loading" v-if="loadingView">
+    <h1 class="text-white text-center font-bold text-3xl"
+      style="position: absolute;top: 50vh;left: 50vw;transform: translate(-50%,-50%);">
+      After school
+    </h1>
+  </div>
   <div class="mx-auto" style="width: 1020px">
-    <div class="flex justify-between position fixed mt-2" style="width: 1020px">
+    <div class="flex justify-between position fixed mt-5" style="width: 1020px">
       <RouterLink class="text-white text-center font-bold text-3xl" to="/">After school</RouterLink>
 
       <RouterLink class="px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300" to="/postThread">
@@ -93,13 +105,15 @@ const bad = () => {
             <p class="text-white font-bold mt-3 text-xl opacity-50 text-left">{{ thread.username }}・{{ thread.date }}</p>
             <div class="flex mt-12">
               <button
-              class="w-12 h-12  bg-pink-600 text-lg text-white font-semibold rounded-full hover:bg-pink-700 border-2 border-pink-500"
-              @click="favorite"><img :src="favoriteSrc" class="m-auto"></button>
-              <p class="text-white text-center font-extrabold tracking-tight text-xl mr-5 opacity-50 mx-5 my-auto">{{ thread.favorite }}</p>  
+                class="w-12 h-12  bg-pink-600 text-lg text-white font-semibold rounded-full hover:bg-pink-700 border-2 border-pink-500"
+                @click="favorite"><img :src="favoriteSrc" class="m-auto"></button>
+              <p class="text-white text-center font-extrabold tracking-tight text-xl mr-5 opacity-50 mx-5 my-auto">{{
+                thread.favorite }}</p>
               <button
-              class="w-12 h-12  bg-purple-600 text-lg text-white font-semibold rounded-full hover:bg-purple-700 border-2 border-purple-500"
-              @click="bad"><img :src="badSrc" class="m-auto"></button>
-              <p class="text-white text-center font-extrabold tracking-tight text-xl mr-5 opacity-50 mx-5 my-auto">{{ thread.bad }}</p>  
+                class="w-12 h-12  bg-purple-600 text-lg text-white font-semibold rounded-full hover:bg-purple-700 border-2 border-purple-500"
+                @click="bad"><img :src="badSrc" class="m-auto"></button>
+              <p class="text-white text-center font-extrabold tracking-tight text-xl mr-5 opacity-50 mx-5 my-auto">{{
+                thread.bad }}</p>
             </div>
           </div>
         </div>
@@ -113,5 +127,21 @@ const bad = () => {
   width: 320px;
   height: 320px;
   object-fit: cover;
+}
+</style>
+
+<style>
+@keyframes fadeInAnime {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 </style>
