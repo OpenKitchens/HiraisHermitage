@@ -74,9 +74,9 @@ const goView = (data: any) => {
 
       <div class="grid grid-cols-3 gap-4">
         <div v-for="thread in threads" class="position relative card">
-          <div class="flex items-center justify-center position relative card z-10">
+          <div class="flex items-center justify-center position relative card z-10" @click="goView(thread.threadID)">
             <div class="flex flex-col">
-              <h1 class="text-white text-center font-extrabold tracking-tight text-3xl" @click="goView(thread.threadID)">
+              <h1 class="text-white text-center font-extrabold tracking-tight text-3xl">
                 {{ thread.Title }}
               </h1>
               <p class="text-white text-center font-extrabold tracking-tight text-xl opacity-50">{{ thread.date }}</p>
