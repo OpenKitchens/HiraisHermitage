@@ -1,0 +1,117 @@
+<script setup lang="ts">
+import { ref } from "vue"
+import { useRoute, RouterLink } from 'vue-router';
+
+const route = useRoute();
+//通信
+const request = (accessPoint: any, data: any, func: any) => {
+  let headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  let request = new Request(`https://entertaining-balanced-practice.glitch.me/${accessPoint}`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(data)
+  });
+  fetch(request)
+    .then(response => {
+      // レスポンス変換
+      return response.json();
+    })
+    .then(data => {
+      // データ処理
+      func(data)
+    })
+    .catch(error => {
+      // エラー処理
+      console.error(error)
+    });
+}
+
+request("getThread", { threadID: route.query.view }, (data: any) => {
+  thread.value = data
+  console.log(data)
+  background.value = `background-image: url('${data.Image}')`
+})
+
+const thread: any = ref({})
+const background = ref("")
+
+const favoriteSrc = ref("/icons/heart.svg")
+const badSrc = ref("/icons/bad.svg")
+
+const favorite = () => {
+  favoriteSrc.value = "/icons/heart.fill.svg"
+  badSrc.value = "/icons/bad.svg"
+
+  request("count", { threadID: route.query.view, key: "favorite" }, (data: any) => {
+  })
+
+  request("uncount", { threadID: route.query.view, key: "bad" }, (data: any) => {
+  })
+  thread.value.favorite++
+  thread.value.bad--
+}
+
+const bad = () => {
+  badSrc.value = "/icons/bad.fill.svg"
+  favoriteSrc.value = "/icons/heart.svg"
+
+  request("uncount", { threadID: route.query.view, key: "favorite" }, (data: any) => {
+  })
+
+  request("count", { threadID: route.query.view, key: "bad" }, (data: any) => {
+  })
+  thread.value.bad++
+  thread.value.favorite--
+}
+
+
+</script>
+
+<template>
+  <div class="mx-auto" style="width: 1020px">
+    <div class="flex justify-between position fixed mt-2" style="width: 1020px">
+      <RouterLink class="text-white text-center font-bold text-3xl" to="/">After school</RouterLink>
+
+      <RouterLink class="px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300" to="/postThread">
+        スレッド投稿
+      </RouterLink>
+    </div>
+  </div>
+  <div class="h-screen w-screen fixed -z-50">
+    <div :style="background" class="h-4/5 w-screen absolute bg-center bg-cover opacity-30"></div>
+    <div class="flex items-center justify-center absolute z-10 w-screen h-4/5"></div>
+  </div>
+
+  <div class="w-screen" style="height: 90vh;">
+    <div class="h-4/5 w-screen">
+      <div style="position: absolute; top: 40%;left: 40%; transform: translate(-50%,-50%)">
+        <div class="flex">
+          <img :src="thread.Image" class="card mr-10">
+          <div class="my-auto ml-10">
+            <h1 class="text-white text-left font-extrabold tracking-tight text-5xl">{{ thread.Title }}</h1>
+            <p class="text-white font-bold mt-3 text-xl opacity-50 text-left">{{ thread.username }}・{{ thread.date }}</p>
+            <div class="flex mt-12">
+              <button
+              class="w-12 h-12  bg-pink-600 text-lg text-white font-semibold rounded-full hover:bg-pink-700 border-2 border-pink-500"
+              @click="favorite"><img :src="favoriteSrc" class="m-auto"></button>
+              <p class="text-white text-center font-extrabold tracking-tight text-xl mr-5 opacity-50 mx-5 my-auto">{{ thread.favorite }}</p>  
+              <button
+              class="w-12 h-12  bg-purple-600 text-lg text-white font-semibold rounded-full hover:bg-purple-700 border-2 border-purple-500"
+              @click="bad"><img :src="badSrc" class="m-auto"></button>
+              <p class="text-white text-center font-extrabold tracking-tight text-xl mr-5 opacity-50 mx-5 my-auto">{{ thread.bad }}</p>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.card {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+}
+</style>
