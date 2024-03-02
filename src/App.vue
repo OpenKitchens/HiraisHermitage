@@ -8,7 +8,7 @@ import { RouterView } from 'vue-router'
 </template>
 
 <style>
-body {
+* {
   overflow-x: hidden;
 }
 
