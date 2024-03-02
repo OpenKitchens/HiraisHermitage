@@ -52,14 +52,14 @@ const loading = ref("")
 </script>
 
 <template>
-  <div class="w-full h-full position fixed z-20 bg-black loading" :style="loading" v-if="loadingView">
+  <div class="w-full h-full position fixed z-50 bg-black loading" :style="loading" v-if="loadingView">
     <h1 class="text-white text-center font-bold text-3xl"
       style="position: absolute;top: 50vh;left: 50vw;transform: translate(-50%,-50%);">
       After school
     </h1>
   </div>
   <div class="mx-auto" style="width: 1020px">
-    <div class="flex justify-between position fixed mt-5" style="width: 1020px">
+    <div class="flex justify-between position fixed mt-5 z-30" style="width: 1020px">
       <RouterLink class="text-white text-center font-bold text-3xl" to="/">After school</RouterLink>
 
       <RouterLink class="px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300" to="/postThread">
