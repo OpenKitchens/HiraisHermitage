@@ -57,7 +57,7 @@ const favorite = () => {
   thread.value.favorite++
   thread.value.bad--
 
-  if(thread.value.bad <= 0){
+  if (thread.value.bad <= 0) {
     thread.value.bad = 0
   }
 }
@@ -74,7 +74,7 @@ const bad = () => {
   thread.value.bad++
   thread.value.favorite--
 
-  if(thread.value.favorite <= 0){
+  if (thread.value.favorite <= 0) {
     thread.value.favorite = 0
   }
 }
@@ -89,11 +89,12 @@ const bad = () => {
       After school
     </h1>
   </div>
-  <div class="mx-auto" style="width: 1020px">
-    <div class="flex justify-between position fixed mt-5" style="width: 1020px">
+  <div class="w-screen lg:mx-20 sm:mx-10 mx-5">
+    <div class="flex justify-between position fixed mt-5 z-30 width">
       <RouterLink class="text-white text-center font-bold text-3xl" to="/">After school</RouterLink>
 
-      <RouterLink class="px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300" to="/postThread">
+      <RouterLink class="px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300"
+        to="/postThread">
         スレッド投稿
       </RouterLink>
     </div>
@@ -105,23 +106,24 @@ const bad = () => {
 
   <div class="w-screen" style="height: 90vh;">
     <div class="h-4/5 w-screen">
-      <div style="position: absolute; top: 40%;left: 40%; transform: translate(-50%,-50%)">
+      <div style="position: absolute; top: 40%;left: 50%; transform: translate(-50%,-50%);width: 70vw;">
         <div class="flex">
-          <img :src="thread.Image" class="card mr-10">
+          <img :src="thread.Image" class="card mr-10 hidden md:block">
           <div class="my-auto ml-10">
             <h1 class="text-white text-left font-extrabold tracking-tight text-5xl">{{ thread.Title }}</h1>
-            <p class="text-white font-bold mt-3 text-xl opacity-50 text-left">{{ thread.username }}・{{ thread.date }}</p>
+            <p class="text-white font-bold mt-3 text-xl opacity-50 text-left">{{ thread.username }}・{{ thread.date }}
+            </p>
             <div class="flex mt-12">
               <button
                 class="w-12 h-12  bg-pink-600 text-lg text-white font-semibold rounded-full hover:bg-pink-700 border-2 border-pink-500"
                 @click="favorite"><img :src="favoriteSrc" class="m-auto"></button>
               <p class="text-white text-center font-extrabold tracking-tight text-xl mr-5 opacity-50 mx-5 my-auto">{{
-                thread.favorite }}</p>
+    thread.favorite }}</p>
               <button
                 class="w-12 h-12  bg-purple-600 text-lg text-white font-semibold rounded-full hover:bg-purple-700 border-2 border-purple-500"
                 @click="bad"><img :src="badSrc" class="m-auto"></button>
               <p class="text-white text-center font-extrabold tracking-tight text-xl mr-5 opacity-50 mx-5 my-auto">{{
-                thread.bad }}</p>
+    thread.bad }}</p>
             </div>
           </div>
         </div>
@@ -135,6 +137,19 @@ const bad = () => {
   width: 320px;
   height: 320px;
   object-fit: cover;
+}
+
+
+.width {
+  width: calc(100vw - 2.5rem);
+
+  @media (min-width: 640px) {
+    width: calc(100vw - 5rem);
+  }
+
+  @media (min-width: 1024px) {
+    width: calc(100vw - 10rem);
+  }
 }
 </style>
 

@@ -52,68 +52,80 @@ const loading = ref("")
 </script>
 
 <template>
-  <div class="w-full h-full position fixed z-50 bg-black loading" :style="loading" v-if="loadingView">
-    <h1 class="text-white text-center font-bold text-3xl"
-      style="position: absolute;top: 50vh;left: 50vw;transform: translate(-50%,-50%);">
-      After school
-    </h1>
-  </div>
-  <div class="mx-auto" style="width: 1020px">
-    <div class="flex justify-between position fixed mt-5 z-30" style="width: 1020px">
-      <RouterLink class="text-white text-center font-bold text-3xl" to="/">After school</RouterLink>
+  <div class="w-screen">
 
-      <RouterLink class="px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300" to="/postThread">
-        スレッド投稿
-      </RouterLink>
+    <div class="w-screen h-screen position fixed z-50 bg-black loading" :style="loading" v-if="loadingView">
+      <h1 class="text-white text-center font-bold text-3xl"
+        style="position: absolute;top: 50vh;left: 50vw;transform: translate(-50%,-50%);">
+        After school
+      </h1>
     </div>
-  </div>
-  <div class="h-screen w-screen fixed -z-50">
-    <div style="background-image: url('/images/background.png')"
-      class="h-4/5 w-screen absolute bg-center bg-cover opacity-60"></div>
-    <div class="flex items-center justify-center absolute z-10 w-screen h-4/5"></div>
-  </div>
 
-  <div class="w-screen" style="height: 90vh;">
-    <div class="h-4/5 w-screen">
-      <div style="position: absolute; top: 40%;left: 50%; transform: translate(-50%,-50%)">
-        <h1 class="text-white text-center font-extrabold tracking-tight text-5xl">Hirai's Hermitage</h1>
+    <div class="w-screen lg:mx-20 sm:mx-10 mx-5">
+      <div class="flex justify-between position fixed mt-5 z-30 width">
+        <RouterLink class="text-white text-center font-bold text-3xl" to="/">After school</RouterLink>
+
+        <RouterLink class="px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300"
+          to="/postThread">
+          スレッド投稿
+        </RouterLink>
       </div>
     </div>
-  </div>
+    <div class="h-screen w-screen fixed -z-50">
+      <div style="background-image: url('/images/background.png')"
+        class="h-4/5 w-screen absolute bg-center bg-cover opacity-60"></div>
+      <div class="flex items-center justify-center absolute z-10 w-screen h-4/5"></div>
+    </div>
 
-  <div class="w-full bg-black pt-12">
-    <div class="mx-auto pt-12" style="width: 1020px">
-      <h1 class="text-white text-left font-extrabold tracking-tight text-3xl mb-5">After Gallery</h1>
+    <div class="w-screen" style="height: 90vh;">
+      <div class="h-4/5 w-screen">
+        <div style="position: absolute; top: 40%;left: 50%; transform: translate(-50%,-50%)">
+          <h1 class="text-white text-center font-extrabold tracking-tight text-5xl">Hirai's Hermitage</h1>
+        </div>
+      </div>
+    </div>
 
-      <div class="grid grid-cols-3 gap-4 mb-20">
-        <div v-for="thread in threads" class="position relative card">
-          <div class="flex items-center justify-center position relative card z-10" @click="goView(thread.threadID)">
-            <div class="flex flex-col">
-              <h1 class="text-white text-center font-extrabold tracking-tight text-3xl">
-                {{ thread.Title }}
-              </h1>
-              <p class="text-white text-center font-extrabold tracking-tight text-xl opacity-50">{{ thread.date }}</p>
+    <div class="w-screen bg-black pt-12">
+      <div class="mx-auto pt-12 width">
+        <h1 class="text-white text-left font-extrabold tracking-tight text-3xl mb-5">After Gallery</h1>
+
+        <div class="grid gap-4 mb-20 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 mx-20 sm:mx-10 lg:mx-0">
+          <div v-for="thread in threads" class="position relative card">
+            <div class="flex items-center justify-center position relative card z-10" @click="goView(thread.threadID)">
+              <div class="flex flex-col">
+                <h1 class="text-white text-center font-extrabold tracking-tight text-3xl">
+                  {{ thread.Title }}
+                </h1>
+                <p class="text-white text-center font-extrabold tracking-tight text-xl opacity-50">{{ thread.date }}</p>
+              </div>
             </div>
+            <img :src="thread.Image" class="position absolute top-0 z-0 card opacity-70">
           </div>
-          <img :src="thread.Image" class="position absolute top-0 z-0 card opacity-70">
         </div>
-      </div>
 
-      <div class="w-screen mt-20 mb-10">
-        <div style="width: 1020px">
-          <h1 class="text-white text-left font-bold text-3xl">After school</h1>
-          <p class="text-white text-left mt-3 font-semibold opacity-50">create by MOYASI ❤️</p>
+        <div class="w-screen mt-20 mb-10 w-screen lg:mx-20 sm:mx-10 mx-5">
+          <div class="width">
+            <h1 class="text-white text-left font-bold text-3xl">After school</h1>
+            <p class="text-white text-left mt-3 font-semibold opacity-50">create by MOYASI ❤️</p>
+          </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.card {
-  width: 320px;
-  height: 320px;
-  object-fit: cover;
+
+.width {
+  width: calc(100vw - 2.5rem);
+
+  @media (min-width: 640px) {
+    width: calc(100vw - 5rem);
+  }
+
+  @media (min-width: 1024px) {
+    width: calc(100vw - 10rem);
+  }
 }
 </style>

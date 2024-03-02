@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { useRouter ,RouterLink } from 'vue-router';
+import { useRouter, RouterLink } from 'vue-router';
 
 const router = useRouter();
 const username = ref("");
@@ -56,13 +56,13 @@ const submit = () => {
 </script>
 
 <template>
-  <div class="mx-auto" style="width: 1020px">
-    <div class="flex justify-between mt-2" style="width: 1020px">
+  <div class="mx-auto" style="max-width: 1020px">
+    <div class="flex justify-between mt-2" style="max-width: 1020px">
       <RouterLink class="text-white text-center font-bold text-3xl" to="/">After school</RouterLink>
     </div>
 
     <div class="max-w-md mx-auto">
-      <div class="relative z-0 w-full mb-5 group">
+      <div class="relative z-0 w-full mb-5 group mx-20" style="width: calc(100vw - 10rem)">
 
         <RouterLink to="/" class="flex mt-12 mb-10">
           <div class="w-12 h-12 rounded-full hover:bg-white-300 border border-zinc-600">
@@ -78,9 +78,10 @@ const submit = () => {
         <input type="text"
           class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer"
           placeholder="記事のタイトル" required v-model="Title" />
+
+        <button type="submit" class="mt-12 px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300"
+          @click="submit">Submit</button>
       </div>
-      <button type="submit" class="px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300"
-        @click="submit">Submit</button>
     </div>
   </div>
 </template>
