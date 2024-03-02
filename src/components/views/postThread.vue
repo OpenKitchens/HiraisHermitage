@@ -65,14 +65,13 @@ const submit = () => {
       <div class="relative z-0 w-full mb-5 group mx-20" style="width: calc(100vw - 10rem)">
       </div>
 
-      <RouterLink to="/" class="flex mt-12 mb-10">
-        <div class="w-12 h-12 rounded-full hover:bg-white-300 border border-zinc-600">
-          <img src="/icons/back.svg" class="m-auto" style="margin-top: 15px;">
-        </div>
-        <h1 class="text-white font-bold text-2xl my-auto ml-3">Back</h1>
-      </RouterLink>
-
-      <div class="mx-20">
+      <div class="mx-5">
+        <RouterLink to="/" class="flex mt-12 mb-10">
+          <div class="w-12 h-12 rounded-full hover:bg-white-300 border border-zinc-600">
+            <img src="/icons/back.svg" class="m-auto" style="margin-top: 15px;">
+          </div>
+          <h1 class="text-white font-bold text-2xl my-auto ml-3">Back</h1>
+        </RouterLink>
         <input type="text"
           class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer rounded-none"
           placeholder="ユーザー名" required v-model="username" />
