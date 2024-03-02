@@ -72,16 +72,19 @@ const submit = () => {
         <h1 class="text-white font-bold text-2xl my-auto ml-3">Back</h1>
       </RouterLink>
 
-      <input type="text"
-        class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer"
-        placeholder="ユーザー名" required v-model="username" />
+      <div class="mx-20">
+        <input type="text"
+          class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer rounded-none"
+          placeholder="ユーザー名" required v-model="username" />
 
-      <input type="text"
-        class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer"
-        placeholder="記事のタイトル" required v-model="Title" />
+        <input type="text"
+          class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer rounded-none"
+          placeholder="記事のタイトル" required v-model="Title" />
 
-      <button type="submit" class="mt-12 px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300"
-        @click="submit">Submit</button>
+        <button type="submit"
+          class="mt-12 px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300"
+          @click="submit">Submit</button>
+      </div>
     </div>
   </div>
 
