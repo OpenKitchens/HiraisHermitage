@@ -53,7 +53,6 @@ const loading = ref("")
 
 <template>
   <div class="w-screen">
-
     <div class="w-screen h-screen position fixed z-50 bg-black loading" :style="loading" v-if="loadingView">
       <h1 class="text-white text-center font-bold text-3xl"
         style="position: absolute;top: 50vh;left: 50vw;transform: translate(-50%,-50%);">
@@ -89,7 +88,7 @@ const loading = ref("")
       <div class="mx-auto pt-12 width">
         <h1 class="text-white text-left font-extrabold tracking-tight text-3xl mb-5">After Gallery</h1>
 
-        <div class="grid gap-4 mb-20 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 mx-0 sm:mx-0 lg:mx-0">
+        <div class="grid gap-4 mb-20 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 mx-5 sm:mx-0 lg:mx-0">
           <div v-for="thread in threads" class="position relative card">
             <div class="flex items-center justify-center position relative card z-10" @click="goView(thread.threadID)">
               <div class="flex flex-col">
