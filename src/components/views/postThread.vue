@@ -16,7 +16,7 @@ const YYYYMMDD = `${year}/${month}/${date}`;
 const request = (accessPoint: any, data: any, func: any) => {
   let headers = new Headers();
   headers.append('Content-Type', 'application/json');
-  let request = new Request(`https://entertaining-balanced-practice.glitch.me/${accessPoint}`, {
+  let request = new Request(`https://frozen-thicket-61367-2b17a9177877.herokuapp.com/${accessPoint}`, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(data)
