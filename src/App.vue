@@ -9,7 +9,7 @@ import { RouterView } from 'vue-router'
 
 <style>
 body {
-  /*overflow-x: hidden;*/
+  overflow-x: hidden;
 }
 
 .card {
