@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useRouter, RouterLink } from 'vue-router';
+import { v4 as uuidv4 } from 'uuid';
 
 const router = useRouter();
 const username = ref("");
@@ -16,7 +17,7 @@ const YYYYMMDD = `${year}/${month}/${date}`;
 const request = (accessPoint: any, data: any, func: any) => {
   let headers = new Headers();
   headers.append('Content-Type', 'application/json');
-  let request = new Request(`https://frozen-thicket-61367-2b17a9177877.herokuapp.com/${accessPoint}`, {
+  let request = new Request(`https://after-school-440db2b96f2e.herokuapp.com/${accessPoint}`, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(data)
@@ -35,24 +36,64 @@ const request = (accessPoint: any, data: any, func: any) => {
     });
 }
 
+
+const fileInput = ref<HTMLInputElement | null>(null);
+
+const handleFileChange = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length) {
+    // ファイルが選択された時の処理
+    console.log('Selected file:', input.files[0]);
+  }
+};
+
+
 const submit = () => {
-  const uuid = crypto.randomUUID()
-  request("postThread", {
-    Title: Title.value,
-    Image: "https://tadaup.jp/4561eec7.png",
-    favorite: 0,
-    bad: 0,
-    date: YYYYMMDD,
-    username: username.value,
-    threadID: uuid,
-  }, (data: any) => {
-    console.log(data)
-    router.push({
-      path: 'imageView',
-      query: { view: uuid }
-    });
-  })
-}
+  if (fileInput.value && fileInput.value.files && fileInput.value.files.length) {
+    const formData = new FormData();
+    formData.append('image', fileInput.value.files[0]);
+
+    fetch('https://after-school-440db2b96f2e.herokuapp.com/upload', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then(data => {
+        const imageUrl = JSON.parse(data)
+
+        console.log(imageUrl);
+        console.log("https://after-school-440db2b96f2e.herokuapp.com/" + imageUrl.imageUrl);
+        console.log("https://after-school-440db2b96f2e.herokuapp.com/" + imageUrl.imageUrl)
+
+        const Image = "https://after-school-440db2b96f2e.herokuapp.com/" + imageUrl.imageUrl
+
+        const uuid = uuidv4()
+        request("postThread", {
+          Title: Title.value,
+          Image: Image,
+          favorite: 0,
+          bad: 0,
+          date: YYYYMMDD,
+          username: username.value,
+          threadID: uuid,
+        }, (data: any) => {
+          console.log(data)
+          router.push({
+            path: 'imageView',
+            query: { view: uuid }
+          });
+        },)
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  }
+};
 </script>
 
 <template>
@@ -80,6 +121,10 @@ const submit = () => {
           class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer rounded-none"
           placeholder="記事のタイトル" required v-model="Title" />
 
+        <label class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer rounded-none">
+          Upload Images
+          <input class="hidden" ref="fileInput" type="file" @change="handleFileChange">
+        </label>
         <button type="submit"
           class="mt-12 px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300"
           @click="submit">Submit</button>

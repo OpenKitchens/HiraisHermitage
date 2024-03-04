@@ -8,7 +8,7 @@ const router = useRouter();
 const request = (accessPoint: any, data: any, func: any) => {
   let headers = new Headers();
   headers.append('Content-Type', 'application/json');
-  let request = new Request(`https://frozen-thicket-61367-2b17a9177877.herokuapp.com/${accessPoint}`, {
+  let request = new Request(`https://after-school-440db2b96f2e.herokuapp.com/${accessPoint}`, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(data)
