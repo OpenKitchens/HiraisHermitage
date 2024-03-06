@@ -1,45 +1,7 @@
-
-<script setup lang="ts">
-import { ref } from "vue"
-import { RouterLink } from 'vue-router';
-
-const username = "";
-const Title = "";
-
-const now = new Date();
-const year = now.getFullYear();
-const month = now.getMonth() + 1;
-const date = now.getDate();
-const YYYYMMDD = `${year}/${month}/${date}`;
-
-//通信
-const request = (accessPoint: any, data: any, func: any) => {
-  let headers = new Headers();
-  headers.append('Content-Type', 'application/json');
-  let request = new Request(`https://after-school-440db2b96f2e.herokuapp.com/${accessPoint}`, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify(data)
-  });
-  fetch(request)
-    .then(response => {
-      // レスポンス変換
-      return response.json();
-    })
-    .then(data => {
-      // データ処理
-      func(data)
-    })
-    .catch(error => {
-      // エラー処理
-      console.error(error)
-    });
-}
-
-request("reset", {}, (data: any) => {
-  console.log(data)
-})
-</script>
 <template>
-  <div>hi</div>
- </template>
+  <img src="https://5dce1c89-2fc2-4aae-aabe-548ca2ee1d87-00-9z1w8shx3ap6.riker.replit.dev/image-1709727862553.png">
+</template>
+
+<script>
+
+</script>

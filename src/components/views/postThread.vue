@@ -1,7 +1,64 @@
 <script setup lang="ts">
+
+let shougakuseiangouTable = {
+  "a": "b",
+  "b": "c",
+  "c": "d",
+  "d": "e",
+  "e": "f",
+  "f": "g",
+  "g": "h",
+  "h": "i",
+  "i": "j",
+  "j": "k",
+  "k": "l",
+  "l": "m",
+  "m": "n",
+  "n": "o",
+  "o": "p",
+  "p": "q",
+  "q": "r",
+  "r": "s",
+  "s": "t",
+  "t": "u",
+  "u": "v",
+  "v": "w",
+  "w": "x",
+  "x": "y",
+  "y": "z",
+  "z": "a"
+}
+
+function angouka(input: any) {
+  let output = "";
+  for (let i = 0; i < input.length; i++) {
+    if (shougakuseiangouTable.hasOwnProperty(input.charAt(i))) {
+      output += shougakuseiangouTable[input.charAt(i)];
+    } else {
+      output += input.charAt(i);
+    }
+  }
+  return output;
+}
+
+function replaceExtension(url: any) {
+  // URLの末尾が.qohで終わっている場合に.pngに置き換える正規表現
+  let regex = /\.qoh$/;
+  // URLが.qohで終わっている場合は.pngに置き換える
+  if (regex.test(url)) {
+    return url.replace(regex, ".png");
+  } else {
+    return url; // .qohで終わっていない場合はそのまま返す
+  }
+}
+
+
 import { ref } from "vue"
 import { useRouter, RouterLink } from 'vue-router';
 import { v4 as uuidv4 } from 'uuid';
+
+const isPush = ref(false)
+const button = ref("Submit")
 
 const router = useRouter();
 const username = ref("");
@@ -49,11 +106,14 @@ const handleFileChange = (event: Event) => {
 
 
 const submit = () => {
+  isPush.value = true
+  button.value = "Submit..."
   if (fileInput.value && fileInput.value.files && fileInput.value.files.length) {
     const formData = new FormData();
     formData.append('image', fileInput.value.files[0]);
 
-    fetch('https://after-school-440db2b96f2e.herokuapp.com/upload', {
+    //fetch('http://localhost:3000/upload', {
+    fetch('https://5dce1c89-2fc2-4aae-aabe-548ca2ee1d87-00-9z1w8shx3ap6.riker.replit.dev/upload', {
       method: 'POST',
       body: formData
     })
@@ -64,13 +124,10 @@ const submit = () => {
         return response.text();
       })
       .then(data => {
-        const imageUrl = JSON.parse(data)
 
-        console.log(imageUrl);
-        console.log("https://after-school-440db2b96f2e.herokuapp.com/" + imageUrl.imageUrl);
-        console.log("https://after-school-440db2b96f2e.herokuapp.com/" + imageUrl.imageUrl)
-
-        const Image = "https://after-school-440db2b96f2e.herokuapp.com/" + imageUrl.imageUrl
+        const Image = "https://ahead-button-gazelle.glitch.me/service?url=" + replaceExtension(angouka(data))
+        console.log(Image)
+        console.log(replaceExtension(angouka(data)))
 
         const uuid = uuidv4()
         request("postThread", {
@@ -121,17 +178,20 @@ const submit = () => {
           class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer rounded-none"
           placeholder="記事のタイトル" required v-model="Title" />
 
-        <label class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer rounded-none">
+        <label
+          class="mt-8 block py-2.5 px-0 w-full text-xl text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-white-500 focus:outline-none focus:ring-0 focus:border-white-600 peer rounded-none">
           Upload Images
           <input class="hidden" ref="fileInput" type="file" @change="handleFileChange">
         </label>
         <button type="submit"
-          class="mt-12 px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300"
-          @click="submit">Submit</button>
+          class="mt-12 px-5 py-2 bg-gray-200 text-black font-semibold rounded-full hover:bg-gray-300" @click="submit"
+          :disabled="isPush">{{ button }}</button>
       </div>
     </div>
   </div>
 
+  https://ahead-button-gazelle.glitch.me/service?url=iuuqt://5edf1d89-2gd2-4bbf-bbcf-548db2ff1e87-00-9a1x8tiy3bq6.sjlfs.sfqmju.efw/jnbhf-1709733123372.png
+  https://ahead-button-gazelle.glitch.me/service?url=iuuqt://5edf1d89-2gd2-4bbf-bbcf-548db2ff1e87-00-9a1x8tiy3bq6.sjlfs.sfqmju.efw/jnbhf-1709727862553.png
 </template>
 
 <style scoped></style>
