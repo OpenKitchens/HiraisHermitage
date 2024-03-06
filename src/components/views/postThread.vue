@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { ref } from "vue"
+import { useRouter, RouterLink } from 'vue-router';
+import { v4 as uuidv4 } from 'uuid';
 
-let shougakuseiangouTable = {
+
+let shougakuseiangouTable: {[key: string]: string} = {
   "a": "b",
   "b": "c",
   "c": "d",
@@ -30,7 +34,7 @@ let shougakuseiangouTable = {
 }
 
 function angouka(input: any) {
-  let output = "";
+  let output: string = "";
   for (let i = 0; i < input.length; i++) {
     if (shougakuseiangouTable.hasOwnProperty(input.charAt(i))) {
       output += shougakuseiangouTable[input.charAt(i)];
@@ -51,11 +55,6 @@ function replaceExtension(url: any) {
     return url; // .qohで終わっていない場合はそのまま返す
   }
 }
-
-
-import { ref } from "vue"
-import { useRouter, RouterLink } from 'vue-router';
-import { v4 as uuidv4 } from 'uuid';
 
 const isPush = ref(false)
 const button = ref("Submit")
@@ -166,7 +165,7 @@ const submit = () => {
       <div class="mx-5">
         <RouterLink to="/" class="flex mt-12 mb-10">
           <div class="w-12 h-12 rounded-full hover:bg-white-300 border border-zinc-600">
-            <img src="/icons/back.svg" class="m-auto" style="margin-top: 15px;">
+            <img src="https://cdn.glitch.global/2f98fdae-c2e3-44cc-9bff-fd5c79c00955/back.svg?v=1709734219151" class="m-auto" style="margin-top: 15px;">
           </div>
           <h1 class="text-white font-bold text-2xl my-auto ml-3">Back</h1>
         </RouterLink>

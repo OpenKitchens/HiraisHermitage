@@ -1,7 +1,37 @@
+<script setup lang="ts">
+const request = (accessPoint: any, data: any, func: any) => {
+  let headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  let request = new Request(`https://after-school-440db2b96f2e.herokuapp.com/${accessPoint}`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(data)
+  });
+  fetch(request)
+    .then(response => {
+      // レスポンス変換
+      func(data)
+    })
+    .then(data => {
+      // データ処理
+    })
+    .catch(error => {
+      // エラー処理
+      console.error(error)
+    });
+}
+
+request("reset", {}, (data: any) => {
+  console.log(data)
+  router.push({
+    path: 'imageView',
+    query: { view: uuid }
+  });
+},)
+</script>
+
 <template>
-  <img src="https://5dce1c89-2fc2-4aae-aabe-548ca2ee1d87-00-9z1w8shx3ap6.riker.replit.dev/image-1709727862553.png">
+  <h1 class="text-white text-center font-bold text-3xl">Delete...</h1>
 </template>
 
-<script>
-
-</script>
+<style scoped></style>

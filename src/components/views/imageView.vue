@@ -42,12 +42,12 @@ const background = ref("")
 const loading = ref("")
 const loadingView = ref(true)
 
-const favoriteSrc = ref("/icons/heart.svg")
-const badSrc = ref("/icons/bad.svg")
+const favoriteSrc = ref("https://cdn.glitch.global/2f98fdae-c2e3-44cc-9bff-fd5c79c00955/heart.svg?v=1709734221332")
+const badSrc = ref("https://cdn.glitch.global/2f98fdae-c2e3-44cc-9bff-fd5c79c00955/bad.svg?v=1709734220184")
 
 const favorite = () => {
-  favoriteSrc.value = "/icons/heart.fill.svg"
-  badSrc.value = "/icons/bad.svg"
+  favoriteSrc.value = "https://cdn.glitch.global/2f98fdae-c2e3-44cc-9bff-fd5c79c00955/heart.fill.svg?v=1709734220740"
+  badSrc.value = "https://cdn.glitch.global/2f98fdae-c2e3-44cc-9bff-fd5c79c00955/bad.svg?v=1709734220184"
 
   request("count", { threadID: route.query.view, key: "favorite" }, (data: any) => {
   })
@@ -63,8 +63,8 @@ const favorite = () => {
 }
 
 const bad = () => {
-  badSrc.value = "/icons/bad.fill.svg"
-  favoriteSrc.value = "/icons/heart.svg"
+  badSrc.value = "https://cdn.glitch.global/2f98fdae-c2e3-44cc-9bff-fd5c79c00955/bad.fill.svg?v=1709734219671"
+  favoriteSrc.value = "https://cdn.glitch.global/2f98fdae-c2e3-44cc-9bff-fd5c79c00955/heart.svg?v=1709734221332"
 
   request("uncount", { threadID: route.query.view, key: "favorite" }, (data: any) => {
   })

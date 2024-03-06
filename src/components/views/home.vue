@@ -71,7 +71,7 @@ const loading = ref("")
       </div>
     </div>
     <div class="h-screen w-screen fixed -z-50">
-      <div style="background-image: url('/images/background.png')"
+      <div style="background-image: url('https://cdn.glitch.global/2f98fdae-c2e3-44cc-9bff-fd5c79c00955/background.png?v=1709734188251')"
         class="h-4/5 w-screen absolute bg-center bg-cover opacity-60"></div>
       <div class="flex items-center justify-center absolute z-10 w-screen h-4/5"></div>
     </div>
